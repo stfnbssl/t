@@ -1,0 +1,46 @@
+{
+	name  "${pkg.name}"
+	
+	version  "${pkg.version}"
+	
+	description "${pkg.description}"
+    
+	author
+		{
+			name "${pkg.author.name}"
+			email "${pkg.author.email}"
+	
+	private false
+	
+	licenses
+		[
+			$if pkg.license.name == 'MIT'
+                {
+                    type "MIT"
+                    url "https://github.com/${pkg.github.userId}/${pkg.name}/tree/master/license.txt"
+	
+	repository
+		{
+			type "git"
+			url "https://github.com/${pkg.github.userId}/${pkg.name}/tree/master"
+
+	engines
+		{
+			node ">=0.10.28"
+			npm ">=1.4.28"
+	
+	scripts
+		{
+			test "mocha tests/**/*.js --full-trace"
+            $hook scripts
+	
+	dependencies
+		{
+			$hook dependencies
+	
+	devDependencies
+		{
+            del "^4.1.1"
+            expect.js "^0.3.1"
+            mocha "^5.2.0"
+			$hook devDependencies

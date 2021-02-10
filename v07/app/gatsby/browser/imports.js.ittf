@@ -1,0 +1,14 @@
+$group
+    
+    import React from 'react'
+    
+    $if pkg.Build.useDefaultLayout
+        import 
+            @ ${pkg.Build.defaultLayout.compName}
+            from '@layouts/${pkg.Build.defaultLayout.fileName}'
+    
+    $if pkg.Build.useRedux
+        import 
+            @ Provider
+            from 'react-redux'
+        import createStore from '@store/index.js'

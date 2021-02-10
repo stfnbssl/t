@@ -1,0 +1,64 @@
+$group
+	$params &md
+
+	import React from 'react'
+	import PropTypes from 'prop-types'
+	
+	$if pkg.Build.useMaterialUI
+		import classNames from 'classnames'
+        $if md.withStyles
+		    import { withStyles } from '@material-ui/core/styles'
+        $if md.withRoot
+            import withRoot from '@utils/withRoot'
+
+    $if pkg.Build.useRedux && pkg.Build.redux.useForm && md.isReduxForm
+        import 
+            @ Field
+            @ FieldArray
+            from 'redux-form'
+
+    $if pkg.Build.useFormik && md.isFormikForm
+        import 
+            @ Formik
+            @ Form
+            @ Field
+            @ FastField
+            @ FieldArray
+            @ setFieldValue
+            @ setFieldTouched
+            @ ErrorMessage
+            from 'formik'
+
+    $hook imports
+
+    react ${md.name}
+
+		$hook
+        
+        $if md.withStyles
+            style
+                $hook styles
+
+    $if md.withStyles || md.withRoot
+        var ${md.name}Comp = ${md.name}
+    
+    $if md.withStyles
+        set ${md.name}Comp
+            _ withStyles
+                @ styles
+                ( 
+                    @ ${md.name}Comp
+
+    $if md.withRoot
+        set ${md.name}Comp
+            _ withRoot
+                @ ${md.name}Comp
+
+    $if md.withStyles || md.withRoot
+        export default ${md.name}Comp
+    $else
+        export default ${md.name}
+
+
+
+

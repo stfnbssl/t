@@ -1,0 +1,18 @@
+$group
+
+    import React from 'react'
+    import 
+        @ renderToString
+        from 'react-dom/server'
+
+    $if pkg.Build.useMaterialUI
+        import JssProvider from 'react-jss/lib/JssProvider'
+        import getPageContext from '@utils/getPageContext'
+
+    $if pkg.Build.useRedux
+        import 
+            @ Provider
+            from 'react-redux'
+        import createStore from '@store/index.js'
+
+

@@ -1,0 +1,33 @@
+﻿$group
+
+    $if pkg.Build.useExpress
+        body-parser "^1.19.0"
+    $if pkg.Build.useMongoDB
+        connect-mongo "^3.2.0"
+    $if pkg.Build.useCors
+        cors "^2.8.5"
+    $if pkg.Build.useAuth && pkg.Build.auth.usePassport && pkg.Build.auth.passport.useLocal
+        crypto "^1.0.1"
+    $if pkg.Build.useConfig && pkg.Build.config.useEnvalid
+        envalid "^7.0.0"
+    $if pkg.Build.useExpress
+        express "^4.17.1"
+    $if pkg.Build.useAuth && pkg.Build.auth.usePassport && pkg.Build.auth.passport.useLocal
+        express-jwt "^6.0.0"
+    $if pkg.Build.express.useSession
+        express-session "^1.17.1"
+    json-stringify-safe "^5.0.1"
+    $if pkg.Build.useAuth && pkg.Build.auth.usePassport && pkg.Build.auth.passport.useLocal
+        jsonwebtoken "^8.5.1"
+    $if pkg.Build.useMongoDB && pkg.Build.mongodb.useMongoose
+        mongoose "^5.11.15"
+    $if pkg.Build.useExpress
+        parseurl "^1.3.3"
+    $if pkg.Build.useAuth && pkg.Build.auth.usePassport
+        passport "^0.4.1"
+        $if pkg.Build.auth.passport.useGithub
+            passport-github2 "^0.1.12"
+        $if pkg.Build.auth.passport.useLocal
+            passport-local "^1.0.0"
+    $if pkg.Build.useSocketIO
+        socket.io "^3.1.1"

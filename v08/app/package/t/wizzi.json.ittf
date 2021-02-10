@@ -1,0 +1,13 @@
+﻿$group
+
+    $if pkg.Build.useWizzi
+        $if pkg.Build.wizzi.useLatest
+            wizzi "latest"
+            wizzi-js "latest"
+            wizzi-web "latest"
+            wizzi-core "latest"
+        $else
+            wizzi "^0.7.12"
+            wizzi-js "^0.7.5"
+            wizzi-web "^0.7.2"
+            wizzi-core "^0.7.1"        

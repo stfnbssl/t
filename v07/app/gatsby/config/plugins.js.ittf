@@ -1,0 +1,105 @@
+$group
+    
+    $if pkg.Build.useModuleResolver    
+        {
+            @ resolve 'gatsby-plugin-module-resolver'
+            { options
+                @ root '${pkg.Build.moduleResolver.root}'
+                { aliases
+                    $foreach item in pkg.Build.moduleResolver.aliases
+                        $if item.root
+                            { '${item.alias}'
+                                @ root '${item.root}'
+                                @ alias '${item.path}'
+                        $else
+                            @ '${item.alias}' '${item.path}'
+                    $if pkg.Build.useReactRedux
+                        {
+                            alias "@store"
+                            path "./store"
+        
+    $if pkg.Build.useBlog
+        @ 'gatsby-transformer-remark'
+        @ 'gatsby-plugin-react-helmet'
+    
+    $if pkg.Build.useContentful
+        {
+            @ resolve `gatsby-source-contentful`
+            @ options
+                {
+                    @ spaceId process.env.CONTENTFUL_SPACE_ID || ''
+                    @ accessToken process.env.CONTENTFUL_ACCESS_TOKEN || ''
+    
+    $if pkg.Build.useFilesystem
+        $foreach item in pkg.Build.filesystem.folders
+            {
+                @ resolve 'gatsby-source-filesystem'
+                @ options
+                    {
+                        @ name '${item.name}'
+                        @ path ${item.path}
+    
+    $if pkg.Build.useJson
+        @ 'gatsby-transformer-json'
+    
+    $if pkg.Build.useStyle
+        $if pkg.Build.style.useTypography
+            {
+                @ resolve 'gatsby-plugin-typography'
+                @ options
+                    {
+                        @ pathToConfigModule 'src/utils/typography'    
+        $if pkg.Build.style.useEmotion
+            @ `gatsby-plugin-emotion`
+    
+    $if pkg.Build.useMongoDB
+        { 
+            @ resolve 'gatsby-source-mongodb'
+            { options
+                @ dbName process.env.MONGODB_DBNAME
+                [ collection
+                    $foreach item in pkg.Build.mongoDB.collections
+                        @ '${item.name}'
+                { server
+                    @ address process.env.MONGODB_ADDRESS
+                    @ port process.env.MONGODB_PORT
+                { auth
+                    @ user process.env.MONGODB_USER
+                    @ password process.env.MONGODB_PASSWORD
+                { map
+                    $foreach item in pkg.Build.mongoDB.collections
+                        $if item.maps && item.maps.length > 0
+                            { ${item.name}
+                                $foreach map in item.maps
+                                    @ ${map.name} '${map.transform}'
+    
+    $if pkg.Build.useMaterialUI
+        $if pkg.Build.materialUI.useGatsbyPlugin
+            @ 'gatsby-plugin-top-layout'
+            { 
+                @ resolve 'gatsby-plugin-material-ui'
+                $if pkg.Build.materialUI.useStyledComponents
+                    # If you want to use styled components you should change the injection order.
+                    { options
+                        { stylesProvider
+                            @ injectFirst true
+            $if pkg.Build.materialUI.useStyledComponents
+                @ 'gatsby-plugin-styled-components'
+
+    $if pkg.Build.useMedium
+        { 
+            @ resolve 'gatsby-source-medium'
+            { options
+                # To test the limit parameter
+                # Replace the publication username with a user
+                # Limit is optional - set quite low as example user doesn't have that many posts
+                # username: `@ReactEurope`,
+                @ username '${pkg.Build.medium.username}'
+                $if pkg.Build.medium.limit
+                    @ limit ${pkg.Build.medium.limit}
+
+    $if pkg.Build.useWizzi
+        { 
+            @ resolve 'gatsby-source-wizzi'
+            { options
+                @ src ${pkg.Build.wizzi.src}

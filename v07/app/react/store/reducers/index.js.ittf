@@ -1,0 +1,20 @@
+﻿$group
+
+	+
+	import { combineReducers } from 'redux'
+	$if pkg.Build.redux.useForm
+		import { reducer as formReducer } from 'redux-form'
+	$if pkg.Build.redux.useFirestore
+		import { firebaseReducer } from 'react-redux-firebase'
+		import { firestoreReducer } from 'redux-firestore'
+	$hook imports
+	+
+	export default
+		_ combineReducers
+			{
+				$if pkg.Build.redux.useFirestore
+					@ firebase firebaseReducer
+					@ firestore firestoreReducer
+				$if pkg.Build.redux.useForm
+					@ form formReducer
+				$hook

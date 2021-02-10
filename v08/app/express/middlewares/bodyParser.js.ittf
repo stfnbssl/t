@@ -1,0 +1,18 @@
+$group
+    $params &opt
+    
+    import bodyParser from 'body-parser'
+
+    $hook imports
+    
+    export 
+        const BodyParserMiddleware
+            => 
+                param app
+                _ app.use
+                    _ bodyParser.urlencoded
+                        { 
+                            @ extended true
+                _ app.use
+                    _ bodyParser.json
+                $hook

@@ -1,0 +1,41 @@
+$group
+
+    $if pkg.Build.useGoogleAnalytics
+        set exports.onRouteUpdate =
+            => 
+                { 
+                    @ location
+                    @ prevLocation
+                # log 'new pathname', location.pathname
+                # log 'old pathname', prevLocation ? prevLocation.pathname : null
+                # Track pageview with google analytics
+                _ window.ga
+                    @ 'set'
+                    @ 'page'
+                    @ location.pathname + location.search + location.hash
+                _ window.ga
+                    @ 'send'
+                    @ 'pageview'
+    
+    $if pkg.Build.useDefaultLayout
+        export
+            const wrapPageElement
+                => 
+                    { 
+                        @ element
+                        @ props
+                    return <${pkg.Build.defaultLayout.compName} {...props}>{element}</${pkg.Build.defaultLayout.compName}>
+    
+    $if pkg.Build.useRedux
+        export
+            const wrapRootElement
+                => 
+                    { 
+                        @ element
+                    const store
+                        _ createStore
+                    const ConnectedRootElement
+                        < Provider 
+                            @ store {store}
+                            + {element}
+                    return ConnectedRootElement

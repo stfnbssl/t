@@ -1,0 +1,29 @@
+﻿$group
+
+	$if pkg.useHusky
+		{ husky
+			{ hooks
+				$if pkg.useLintStaged
+					pre-commit "lint-staged"
+	
+	$if pkg.useLintStaged
+		
+		{ "lint-staged"
+			
+			*.js
+				[
+					"eslint --fix"
+					"git add"
+		
+			$if pkg.usePrettier	
+			
+				*.{js,jsx}"
+					[
+						"prettier --write"
+						"git add"
+			
+				$if pkg.useTypescript
+					*.{ts,tsx}
+						[
+							"prettier --write"
+							"git add"

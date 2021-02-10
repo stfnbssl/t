@@ -1,0 +1,119 @@
+$group
+
+	$
+		var rootContainer = pkg.Build.rootContainer ? pkg.Build.rootContainer : 'AppContainer';
+
+	$if pkg.Build.useBabel && pkg.Build.babel.useBabelRegister
+		_ require('@babel/register')
+	
+	$if pkg.Build.mainStylesBefore
+		_ require('${pkg.Build.mainStylesBefore}')
+
+	$if pkg.Build.useCodemirror
+		_ require('codemirror/lib/codemirror.css')
+		_ require('codemirror/mode/css/css')
+		$if pkg.Build.codemirror.modes
+			$foreach m in pkg.Build.codemirror.modes
+				_ require('codemirror/mode/${m}/${m}');
+			$foreach t in pkg.Build.codemirror.themes
+				_ require('codemirror/theme/${t}.css')
+		# _ require('codemirror/addon/scroll/simplescrollbars')
+	
+	$if pkg.Build.mainStyles
+		_ require('${pkg.Build.mainStyles}')
+	$if pkg.Build.mainStylesAfter
+		_ require('${pkg.Build.mainStylesAfter}')
+
+	import React from 'react'
+	
+	$if pkg.Build.hotReload
+		import { AppContainer as HotAppContainer } from 'react-hot-loader'
+	
+	$if pkg.Build.useRedux
+		import { Provider } from 'react-redux'
+		import configureStore from './store/configureStore'
+	
+	$if pkg.Build.useGraphql && pkg.Build.graphql.useApolloClient
+		import ApolloClient from 'apollo-boost'
+		import { ApolloProvider } from 'react-apollo'
+
+	$if pkg.Build.useReactPerf
+		import ReactPerf from 'react-addons-perf'
+	
+	import { render } from 'react-dom'
+
+	$if pkg.Build.useMaterialUI
+		import MuiThemeContainer from './containers/MuiThemeContainer'
+	$else
+		import ${rootContainer} from './containers/${rootContainer}'
+
+	$if pkg.Build.useCreateReactApp
+		import registerServiceWorker from './registerServiceWorker'
+
+	$hook imports
+
+	$if pkg.Build.useReactPerf
+		set window.Perf = ReactPerf
+
+	$if pkg.Build.useRedux
+		# preloadedState param not used
+		# export const store = configureStore(preloadedState)
+		export const store = configureStore()
+
+
+	const rootEl = document.querySelector('#${pkg.Build.rootElementId}')
+
+	$if pkg.Build.useGraphql && pkg.Build.graphql.useApolloClient
+
+		const client
+			new ApolloClient
+				{
+					@ uri '${pkg.Build.graphql.serverUri}'
+		_ render
+			< ApolloProvider
+				@ client {client}
+				$if pkg.Build.useMaterialUI
+					< MuiThemeContainer
+				$else
+					< ${rootContainer}
+			@ rootEl
+
+	$else
+
+		_ render
+			$if pkg.Build.useRedux
+				< Provider
+					@ store {store}
+					$if pkg.Build.useMaterialUI
+						< MuiThemeContainer
+					$else
+						< ${rootContainer}
+			$else
+				$if pkg.Build.useMaterialUI
+					< MuiThemeContainer
+				$else
+					< ${rootContainer}
+			@ rootEl
+
+	$if pkg.Build.useCreateReactApp
+		_ registerServiceWorker
+
+	$if pkg.Build.useHotReload
+		if process.env.NODE_ENV !== 'production' && module.hot
+			_ module.hot.accept
+				@ './containers/${rootContainer}'
+				=>
+					const NextApp = require('./containers/${rootContainer}').default
+					_ render
+						< HotAppContainer
+							@ errorReporter
+								=>
+									param { error }
+									throw error
+							$if pkg.Build.useRedux
+								< Provider
+									@ store {store}
+									< NextApp
+							$else
+								< NextApp
+						@ rootEl

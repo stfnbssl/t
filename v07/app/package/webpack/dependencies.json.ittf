@@ -1,0 +1,84 @@
+﻿$group
+
+    @babel/runtime "^7.4.5"
+    
+    $if pkg.Build.useReact
+        $if pkg.Build.useMaterialUI
+            $if pkg.Build.materialUI.usePickers
+                @date-io/date-fns "^1.3.6"
+            @material-ui/core "^4.0.0"
+            $if pkg.Build.materialUI.useIcons
+                @material-ui/icons "^4.0.1"
+            $if pkg.Build.materialUI.useLab
+                @material-ui/lab "^4.0.0-alpha.14"
+            $if pkg.Build.materialUI.usePickers
+                @material-ui/pickers "^3.0.0"
+
+    $if pkg.Build.useBootstrap
+        bootstrap "^4.1.3"
+    
+    $if pkg.Build.useReact
+        classnames "^2.2.6"
+        $if pkg.Build.useMaterialUI
+            $if pkg.Build.materialUI.usePickers
+                date-fns "2.0.0-alpha.27"
+
+    $if pkg.Build.useDomHelpers
+        dom-helpers "^3.4.0"
+
+    $if pkg.Build.useReact
+        $if pkg.Build.useDraftJs
+            draft-js "^0.10.5"
+        $if pkg.Build.useFormik
+            formik "^1.5.7"
+
+    $if pkg.Build.useIsomorphicUnfetch
+        isomorphic-unfetch "^3.0.0"
+
+    $if pkg.Build.useMoment
+        moment "^2.24.0"
+
+    $if pkg.Build.useReact
+        react "^16.8.6"
+        react-dom "^16.8.6"
+        $if pkg.Build.useFontawesome
+            react-fontawesome "^1.6.1"
+        $if pkg.Build.usePerfectScrollbar
+            react-perfect-scrollbar "^1.4.4"
+		$if pkg.Build.useRedux
+                react-redux "^7.0.3"
+                $if pkg.Build.redux.useFirestore
+                    react-redux-firebase "^2.2.6"
+        $if pkg.Build.useMaterialUI
+            $if pkg.Build.materialUI.useAutocomplete
+                $if pkg.Build.materialUI.autocomplete.useReactSelect
+                    react-select "^3.0.3"
+
+        $if pkg.Build.transition
+            react-transition-group "^2.4.0"
+        recompose "^0.30.0"
+		
+    $if pkg.Build.useReact
+        $if pkg.Build.useRedux
+            redux "^4.0.1"
+            $if pkg.Build.redux.useAuth
+                redux-auth-wrapper "^2.1.0"
+            $if pkg.Build.redux.useFirestore
+                redux-firestore "^0.8.0"
+            $if pkg.Build.redux.useForm
+                redux-form "^8.2.0"
+        $if pkg.Build.useRouter
+            react-router-dom "^5.0.0"
+        $if pkg.Build.useRedux
+            $if pkg.Build.redux.useThunk
+                redux-thunk "^2.3.0"
+    $if pkg.Build.useSocketIO
+        socket.io-client "^2.2.0"
+    $if pkg.Build.useReact && pkg.Build.styledComponents
+        styled-components "^3.3.3"
+    $if pkg.Build.useUnderscore
+        underscore "^1.9.1"
+    $if pkg.Build.useValidateJs
+        validate.js "^0.12.0"
+    $if pkg.Build.useYup
+        yup "^0.27.0"

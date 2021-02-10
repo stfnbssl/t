@@ -1,0 +1,4 @@
+md
+    h1 ${pkg.name}
+    p ${pkg.description}
+    $hook

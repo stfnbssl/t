@@ -1,0 +1,34 @@
+$group
+    $params &opt
+
+    $ var baseDir = pkg.Build.useNetlify ? '..' : '.'
+
+    import 'babel-polyfill'
+    import 
+        @ config
+        from '${baseDir}/features/config'
+    
+    $if pkg.Build.useMongoDb
+        import mongodbStart from '${baseDir}/services/mongodb'
+    
+    $if pkg.Build.useWizzi
+        $if pkg.Build.wizzi.useSite
+            import { siteControllers } from './site'
+    
+    $* TODO
+    import 
+        @ authControllers
+        @ authModelBuilders
+        from './features/auth'
+    import 
+        @ blogControllers
+        @ blogModelBuilders
+        from './features/blog'
+    *$
+    
+    import 
+        @ appMiddlewares
+        from '${baseDir}/middleware'
+    
+    $if pkg.Build.useNetlify == false
+        import App from './App'

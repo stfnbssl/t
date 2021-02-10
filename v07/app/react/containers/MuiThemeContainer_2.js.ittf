@@ -1,0 +1,83 @@
+﻿$group
+
+	$
+		var rootContainer = pkg.rootContainer ? pkg.rootContainer : 'AppContainer';
+
+	import React from 'react'
+	import PropTypes from 'prop-types'
+	
+	$if pkg.useRedux
+		import { connect } from 'react-redux'
+	
+	import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+	import ${pkg.primaryColor} from '@material-ui/core/colors/${pkg.primaryColor}'
+	import ${pkg.secondaryColor} from '@material-ui/core/colors/${pkg.secondaryColor}'
+	
+	$if pkg.useCssBaseline
+		import CssBaseline from '@material-ui/core/CssBaseline'
+	
+	$if pkg.useReactRouterGlobal
+		import { browserHistory, Router } from 'react-router'
+	$else
+		$if pkg.useRouter
+			import AppContainer from '../components/AppRouter'
+		$else
+			import AppContainer from './${rootContainer}'
+
+	# A theme with custom primary and secondary color. It's optional.
+	const theme
+		_ createMuiTheme
+			{
+				{ palette
+					{ primary
+						@ light ${pkg.primaryColor}[300]
+						@ main ${pkg.primaryColor}[500]
+						@ dark ${pkg.primaryColor}[700]
+					{ secondary
+						@ light ${pkg.secondaryColor}[300]
+						@ main ${pkg.secondaryColor}[500]
+						@ dark ${pkg.secondaryColor}[700]
+					@ type 'dark'
+
+	react MuiThemeContainer
+
+		$if pkg.useReactRouterGlobal
+			prop routes
+				{
+				required
+
+		render
+			
+			$if pkg.useRedux
+				prop dark
+			$else
+				const dark = false
+
+			$if pkg.useReactRouterGlobal
+				prop routes
+			
+			return
+				< MuiThemeProvider
+					@ theme {theme}
+					$if pkg.useCssBaseline
+						< CssBaseline
+					$if pkg.useReactRouterGlobal
+						< Router
+							@ history {browserHistory}
+							+ {routes}
+							< AppContainer
+					$else
+						< AppContainer
+
+	$if pkg.useRedux
+		export default
+			_ connect
+				=>
+					param state
+					return
+						{
+							@ dark state.dark
+				(
+					@ MuiThemeContainer
+	$else
+		export default MuiThemeContainer

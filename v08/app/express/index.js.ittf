@@ -1,0 +1,21 @@
+$group
+    $params &opt
+
+    $if pkg.Build.useNetlify == false
+        index/imports(&opt)
+    
+    $if pkg.Build.useNetlify
+        index/start(&opt)
+    $else
+        async-function start
+            index/start(&opt)
+            _ app.listen
+    
+        try 
+            _ start
+        catch ex
+            log ex
+
+    $if pkg.Build.useNetlify
+        set module.exports = app
+        set module.exports.handler = serverless(app)

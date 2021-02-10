@@ -1,0 +1,232 @@
+﻿$group
+
+	$if pkg.Build.useBabelNode
+		@babel/polyfill "^7.2.5"
+
+	$if pkg.Build.useBabelRegister
+		@babel/core "latest"
+		@babel/register "latest"
+		@babel/preset-env "latest"
+
+	$if pkg.Build.useFirestoreServer
+		@google-cloud/firestore "^0.14.1"	
+
+	$if pkg.Build.useMaterialUI || pkg.Build.useMaterialUIIcons
+		@material-ui/core "^1.1.0"
+		@material-ui/icons "^1.1.0"
+
+	$if pkg.Build.useAphrodite
+		aphrodite "^2.2.3"
+	
+	$if pkg.Build.hasDemo
+		async "latest"
+
+	$if pkg.Build.useAxios
+		axios "^0.16.2"
+
+	$if pkg.Build.useExpress
+		body-parser "^1.18.3"
+
+	$if pkg.Build.useApiMiddleware
+		axios "latest"
+		normalizr "latest"
+
+	$if pkg.Build.useMaterialUI || pkg.Build.useAphrodite
+		classnames "^2.2.6"
+
+	$if pkg.Build.useCodemirror
+		codemirror "^5.38.0"
+
+	$if pkg.Build.useReact
+		classnames "^2.2.6"
+
+	$if pkg.Build.useExpress
+		cors "^2.8.5"
+
+	$if pkg.Build.useDatalayer
+		cuid "^2.1.4"
+	
+	$if pkg.Build.useDotenv
+		dotenv "^6.2.0"
+	
+	$if pkg.Build.useExpress
+		express "^4.16.4"
+
+	$if pkg.Build.useFirestoreBrowser
+		firebase-admin "^4.0.3"
+
+	$if pkg.Build.useFirebase
+		firebase "5.5.7"
+
+	$if pkg.Build.useFirebaseServer
+		firebase-server "^0.11.0"
+	
+	$if pkg.Build.useGraphql
+		
+		graphql 'latest'
+
+		$if pkg.Build.graphql.apolloClient
+			apollo-boost 'latest'
+			react-apollo 'latest'
+		
+		$else
+			
+			graphql-yoga 'latest'
+		
+		$if pkg.Build.graphql.apolloServer
+			apollo-server "latest"
+		
+		$if pkg.Build.graphql.github
+			graphql-binding-github "0.3.25"
+		
+		$if pkg.Build.graphql.prisma
+			prisma "1.8.3"
+			prisma-binding "2.0.0"
+	
+	$if pkg.Build.useLruCache
+		lru-cache "latest"
+
+	$if pkg.Build.useMarkdown
+		highlight.js "^9.12.0"
+		markdown-it "^8.4.1"
+
+	$if pkg.Build.useVue
+		$if pkg.Build.useMonaco2
+			monaco-editor "^0.15.6"
+	
+	$if pkg.Build.useMongose
+		mongoose "^5.4.2"
+
+	$if pkg.Build.useMySql
+		mysql "2.16.0"
+
+	$if pkg.Build.useJsBeautify
+		js-beautify 'latest'
+	
+	$if pkg.Build.hasDemo
+		json-stringify-safe "latest"
+
+	$if pkg.Build.useNeo4j
+		neo4j-driver "latest"
+	
+	$if pkg.Build.useExpress
+		morgan "^1.8.1"
+
+	$if pkg.Build.useNextjs
+		$$ next "^4.1.0"
+		$$ next "latest"
+		next-server "^7.0.2-canary.18"
+		$if pkg.Build.useNextjsServerExpress
+			express "latest"
+
+	$if pkg.Build.hasDemo
+		object-inspect "latest"
+
+	$if pkg.Build.polyfill.objectAssign
+		object-assign "^4.1.1"
+	
+	$if pkg.Build.usePrettier
+		prettier "^1.14.0"
+	
+	$if pkg.Build.usePrismjs
+		prismjs "^1.14.0"
+
+	$if pkg.Build.polyfill.promise
+		promise "^8.0.1"
+
+	$if pkg.Build.polyfill.raf
+		raf "^3.4.0"
+	
+	$if pkg.Build.useReact
+		react "^16.0.0"
+		
+		$if pkg.Build.useAce
+			react-ace "latest"
+		
+		react-dom "^16.0.0"
+		
+		$if pkg.Build.useRedux
+			react-redux "^6.0.0"
+			$if pkg.Build.useReduxFirestore
+				react-redux-firebase "latest"
+		
+		$if pkg.Build.useReduxAuth
+			redux-auth-wrapper "^1.0.0"
+		
+		$if pkg.Build.useReduxForm
+			redux-form "^7.3.0"
+			$if pkg.Build.useMaterialUI
+				redux-form-material-ui "next"
+		
+		$if pkg.Build.useCodemirror
+			react-codemirror2 "latest"
+		
+		$if pkg.Build.useJsonView
+			react-json-view "latest"
+		
+		$if pkg.Build.useReactLowLight
+			react-lowlight "latest"
+			highlight.js "latest"
+
+		$if pkg.Build.useReactMarkdown
+			react-markdown "latest"
+		
+		$if pkg.Build.useMonaco
+			monaco-editor "^0.13.1"
+			react-monaco-editor "latest"
+		
+
+		$if pkg.Build.useReactRouter
+			react-router-dom "^4.3.1"
+		
+		$if pkg.Build.useServer
+			react-render-html "^0.5.2"
+		
+		$if pkg.Build.useSplitter
+			react-split-pane "^0.1.77"
+
+		$if pkg.Build.useCreateReactApp
+			react-scripts "1.1.4"
+	
+	$if pkg.Build.useReact
+        recompose "^0.30.0"
+    
+    $if pkg.Build.useRedux
+		redux "^4.0.1"
+		redux-devtools-extension "^2.13.2"
+		$if pkg.Build.useReduxFirestore
+			redux-firestore "latest"
+		redux-logger "^3.0.6"
+		redux-observable "^1.0.0"
+		redux-thunk "^2.1.0"
+
+	$if pkg.Build.useRedux
+		reselect "^4.0.0"
+
+	$if pkg.Build.useRedux
+		rxjs "^6.4.0"
+	
+	$if pkg.Build.useTypescript
+		$if pkg.Build.TSImportHelpers
+			tslib "1.9.3"
+		$if pkg.Build.TSTypesafeActions
+			typesafe-actions "3.0.0"
+	
+	$if pkg.Build.useVue
+		$if pkg.Build.useMonaco2
+			vue-monaco "^0.3.1"
+
+	$if pkg.Build.polyfill.fetch
+		whatwg-fetch "^2.0.4"
+
+	$if pkg.Build.useWizzi
+		wizzi 'latest'
+		$if pkg.Build.wizziPlugins
+			$foreach item in pkg.Build.wizziPlugins
+				${item} 'latest'
+
+	$if pkg.Build.useWizziUtils
+		wizzi-utils 'latest'
+
+	$if pkg.Build.useWizziTools
+		wizzi-tools 'latest'
