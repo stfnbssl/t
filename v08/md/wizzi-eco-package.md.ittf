@@ -1,0 +1,26 @@
+md
+    $params &opt
+    h1 ${opt.title}
+    p ${opt.subtitle}
+
+    $hook
+
+    p The 
+        a wizzi documentation
+            href https://stfnbssl.github.io/wizzi/
+        + &nbsp;.
+
+    p The 
+        a wizzi
+            href https://github.com/stfnbssl/wizzi
+        + &nbsp;package.
+
+    p The 
+        a wizzi examples
+            href https://github.com/stfnbssl/wizzi-examples
+        + &nbsp;package.        
+
+    p The 
+        a wizzi in the browser
+            href https://github.com/stfnbssl/wizzi-browser
+        + &nbsp;package.                

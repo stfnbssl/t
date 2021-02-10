@@ -1,0 +1,9 @@
+﻿md
+    
+    $
+        var opt = {
+            title: "t",
+            subtitle: "The wizzi global t-Folder",
+        }
+
+    v08/md/wizzi-eco-package(&opt)

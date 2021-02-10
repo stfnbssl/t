@@ -1,0 +1,21 @@
+{
+  "name": "t",
+  "version": "1.0.0",
+  "description": "The wizzi global t-Folder",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stfnbssl/t.git"
+  },
+  "author": "Stefano Bassoli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stfnbssl/t/issues"
+  },
+  "homepage": "https://github.com/stfnbssl/t#readme",
+  "dependencies": {
+    "wizzi": "^0.7.21",
+    "wizzi-core": "^0.7.1",
+    "wizzi-js": "^0.7.7",
+    "wizzi-web": "^0.7.7"
+  }
+}

@@ -1,0 +1,13 @@
+﻿wfjob t/job
+	
+	$
+		var ittf_md_folder       = path.join(__dirname, 'md');
+		var dest_folder          = path.join(__dirname, '..');
+
+	line ittf-md
+		cwd-folder ${ittf_md_folder}
+		wfjob/any_md()
+
+	production
+		dest-folder ${dest_folder}
+		line-ref ittf-md
